@@ -1,6 +1,14 @@
-# staj-2
+## API
+To run server:
 
+    npm install
+    npm run dev
 
-To run the api server, run:
-`npm install`
-`npm start`
+Make sure to copy `.env.example` to your own `.env` file and add DB information
+
+Windows:
+
+    copy .env.example .env
+Linux/Mac:
+
+    cp .env.example .env
