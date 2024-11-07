@@ -13,18 +13,6 @@ app.use((req, res, next) => {
   next(error);
 });
 
-// connecting to the database
-const mongoose = require("mongoose");
-
-mongoose.connect("mongodb+srv://<???UserName>:<????Password>@cluster0.oqiqm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-    .then(() => {
-        console.log("Connected to MongoDB");
-    })
-    .catch((error) => {
-        console.error("Failed to connect to MongoDB:", error);
-    });
-
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
