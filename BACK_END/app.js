@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const { connectToDatabase } = require('./config/database.js');
+
 // const routes = require('./routes');
 
 // uncomment after implementing routes
@@ -15,6 +17,9 @@ app.use((req, res, next) => {
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => {
+
+
+app.listen(PORT, async () => {
+  await connectToDatabase();
   console.log(`API listening on port ${PORT}`);
 });
