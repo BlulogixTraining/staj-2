@@ -1,26 +1,31 @@
-//  Initialize the pg package and get the Client from it.
-const { Client } = require('pg');
-const dotenv = require('dotenv');
-dotenv.config();
+const { DataSource } = require('typeorm');
+require('dotenv').config();
 
-//Database connection configuration
-const client = new Client({
-	user: process.env.DB_USER,
-	password: process.env.DB_PASSWORD,
-	host: process.env.DB_HOST,
-	port: process.env.DB_PORT,
-	database: process.env.DB_NAME,
+const glob = require('glob');
+
+// Dynamically require all entities in the /entity folder
+const entities = glob.sync(__dirname + '/../entity/**/*.js').map(file => require(file));
+
+
+const AppDataSource = new DataSource({
+  type: 'postgres',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10),
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  synchronize: true,
+  logging: false,
+  entities: entities, // Adjust path as needed
 });
-//Connect to the database
-const connectToDatabase = async () => {
-	client
-	.connect()
-		.then(() => {
-			console.log('Connected to PostgreSQL database');
-		})
-		.catch((err) => {
-			console.error('Error connecting to PostgreSQL database', err);
-	});
+
+async function connectToDatabase() {
+  try {
+    await AppDataSource.initialize();
+    console.log('Database connected successfully');
+  } catch (error) {
+    console.error('Database connection error:', error);
+  }
 }
 
-module.exports = { client, connectToDatabase };
+module.exports = { connectToDatabase, AppDataSource }

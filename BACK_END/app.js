@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const { connectToDatabase } = require('./config/database.js');
+const authRoutes = require('./routes/auth.routes.js');
 
 // const routes = require('./routes');
 
@@ -14,6 +15,8 @@ app.use((req, res, next) => {
   error.status = 404;
   next(error);
 });
+
+app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 4000;
 
