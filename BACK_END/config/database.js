@@ -13,10 +13,16 @@ const AppDataSource = new DataSource({
   port: parseInt(process.env.DB_PORT, 10),
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  database: process.env.DB_NAME,
   synchronize: true,
   logging: false,
-  entities: entities, // Adjust path as needed
+  entities: entities,
+  ssl: true,
+  extra: {
+  ssl: {
+      "rejectUnauthorized":false
+}
+} 
 });
 
 async function connectToDatabase() {

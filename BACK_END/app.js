@@ -21,10 +21,6 @@ app.use('/auth', authRoutes);
 const PORT = process.env.PORT || 4000;
 const DB_PORT = process.env.DB_PORT || 5432;
 
-// Log to ensure .env variables are loaded correctly
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_PORT:', process.env.DB_PORT);
-
 app.listen(PORT, async () => {
   await connectToDatabase();
   console.log(`API listening on port ${PORT}`);
