@@ -1,16 +1,15 @@
 const { DataSource } = require('typeorm');
 require('dotenv').config();
 
-const glob = require('glob');
-
-// Dynamically require all entities in the /entity folder
-const entities = glob.sync(__dirname + '/../entities/**/*.js').map(file => require(file));
-
+const entities = [
+  	require('../entities/UserSchema.js'),
+  	// add other entities
+]
 
 const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT, 10),
+  port: process.env.DB_PORT,
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
@@ -19,10 +18,10 @@ const AppDataSource = new DataSource({
   entities: entities,
   ssl: true,
   extra: {
-  ssl: {
+  	ssl: {
       "rejectUnauthorized":false
-}
-} 
+  	}
+  } 
 });
 
 async function connectToDatabase() {
