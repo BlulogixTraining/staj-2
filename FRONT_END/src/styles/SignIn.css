@@ -1,0 +1,114 @@
+/* Wrapper for Sign-In Page */
+.sign-in-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* Side Banner */
+.side-banner {
+  width: 40%;
+  background-color: #4285f4;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.side-banner h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.side-banner p {
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Sign-In Form */
+.sign-in-container {
+  width: 60%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-container h2 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.sign-in-container .form-group {
+  width: 120%;
+  max-width: 400px;
+  margin-bottom: 15px;
+}
+
+.sign-in-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.sign-in-container input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.sign-in-container .error {
+  color: #d93025;
+  font-size: 14px;
+}
+
+.sign-in-container .btn-primary {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block; /* Ensures the button takes up the max-width and centers properly */
+  margin: 20px auto; /* Centers the button horizontally and adds spacing */
+}
+
+.sign-in-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers form elements including the button */
+}
+
+
+.sign-in-container .btn-link {
+  background: none;
+  border: none;
+  color: #4285f4;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .sign-in-wrapper {
+    flex-direction: column;
+  }
+
+  .side-banner {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .sign-in-container {
+    width: 100%;
+  }
+}

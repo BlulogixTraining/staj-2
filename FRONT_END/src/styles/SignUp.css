@@ -1,0 +1,141 @@
+/* SignUp.css */
+
+.sign-up-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  /* Sidebar Styling */
+  .sidebar {
+    width: 30%;
+    background-color: #4285f4;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .sidebar ul li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #4285f4;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .sidebar ul li.active {
+    background-color: #fff;
+    font-weight: bold;
+    border: 2px solid #4285f4;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Content Area Styling */
+  .content {
+    width: 70%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content h2 {
+    margin-bottom: 20px;
+    color: #4285f4;
+    font-size: 28px;
+  }
+  
+  .content input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .content input:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+  }
+  
+  .content button {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .content button:hover {
+    background-color: #fff;
+    color: #4285f4;
+    border: 1px solid #4285f4;
+    transform: scale(1.05);
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .sign-up-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .content {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .content input {
+      max-width: 100%;
+    }
+  
+    .content button {
+      max-width: 100%;
+    }
+  }
+  
