@@ -1,13 +1,18 @@
 import React from 'react';
-import '/workspaces/staj-2/FRONT_END/src/styles/App.css';
-import SignTypes from './components/SignTypes';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignIn from './components/Auth/SignIn';
+import SignUp from './components/Auth/SignUp';
+import HomePage from './components/Auth/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome Back</h1>
-      <SignTypes />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
