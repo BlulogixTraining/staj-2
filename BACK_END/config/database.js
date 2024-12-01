@@ -4,7 +4,7 @@ require('dotenv').config();
 const glob = require('glob');
 
 // Dynamically require all entities in the /entity folder
-const entities = glob.sync(__dirname + '/../entity/**/*.js').map(file => require(file));
+const entities = glob.sync(__dirname + '/../entities/**/*.js').map(file => require(file));
 
 
 const AppDataSource = new DataSource({

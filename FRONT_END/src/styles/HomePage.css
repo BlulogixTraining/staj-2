@@ -1,0 +1,101 @@
+/* General Styling for the HomePage */
+.min-h-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Centered Text Container */
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-center h1 {
+    font-size: 2.5rem; /* Matches 'text-4xl' */
+    font-weight: bold;
+    margin-bottom: 1rem; /* Matches 'mb-4' */
+    color: #333; /* Dark text color */
+  }
+  
+  /* Button Container */
+  .space-x-4 {
+    display: flex;
+    gap: 1rem; /* Adds spacing between buttons */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Button Styling */
+  button {
+    padding: 0.5rem 1rem; /* Matches 'px-4 py-2' */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem; /* Matches 'rounded' */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Specific Button Styles */
+  button.bg-blue-500 {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  display: block; /* Makes the button full width */
+  margin: 20px auto; /* Centers the button horizontally and adds spacing */
+  }
+  
+  button.bg-blue-500:hover {
+   background-color: #ffffff;
+   color: #4285f4;
+   border: 2px solid #4285f4;
+   transition: background-color 0.3s ease, color 0.2s ease;
+   transform: scale(1.05);
+  }
+  
+  button.bg-green-500 {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #4285f4;
+  border: 2px solid #4285f4;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  display: block; /* Makes the button full width */
+  margin: 20px auto; /* Centers the button horizontally and adds spacing */
+  }
+  
+  button.bg-green-500:hover {
+  background-color: #4285f4;
+  color: #ffffff;
+  border: 2px solid #4285f4;
+  
+  transition: background-color 0.3s ease, color 0.2s ease;
+  transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .text-center h1 {
+      font-size: 2rem; /* Slightly smaller for smaller screens */
+    }
+  
+    button {
+      width: 100%; /* Full width for smaller screens */
+      max-width: 300px;
+    }
+  }
+  
