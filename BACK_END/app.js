@@ -2,14 +2,18 @@ require('dotenv').config();  // Load environment variables
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+
 const { connectToDatabase } = require('./config/database.js');
 const authRoutes = require('./routes/auth.routes.js');
+const ruleRoutes = require('./routes/rule.routes.js');
 
-// Uncomment after implementing routes
-// app.use('/api/', routes);
+const app = express();
 app.use(bodyParser.json());
+// Mount the routes
+app.use('/auth', authRoutes); // Authentication routes
+app.use('/rules', ruleRoutes); // Rule routes
 
+// Error handling for unmatched routes
 app.use((req, res, next) => {
   const error = new Error('Not Found');
   error.status = 404;
