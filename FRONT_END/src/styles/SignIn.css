@@ -68,7 +68,7 @@
   font-size: 14px;
 }
 
-.sign-in-container .btn-primary {
+.SignIn_button {
   width: 100%;
   max-width: 200px;
   padding: 10px;
@@ -76,10 +76,19 @@
   color: #fff;
   border: none;
   border-radius: 20px;
+  font-weight: bold;
   font-size: 16px;
   cursor: pointer;
-  display: block; /* Ensures the button takes up the max-width and centers properly */
+  display: block; /* Makes the button full width */
   margin: 20px auto; /* Centers the button horizontally and adds spacing */
+}
+
+.SignIn_button:hover{
+  background-color: #ffffff;
+  color: #4285f4;
+  border: 2px solid #4285f4;
+  transition: background-color 0.3s ease, color 0.2s ease;
+  transform: scale(1.05);
 }
 
 .sign-in-container form {
@@ -89,26 +98,26 @@
 }
 
 
-.sign-in-container .btn-link {
-  background: none;
+.SignUp_button {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  background-color: #4285f4;
+  color: #fff;
   border: none;
-  color: #4285f4;
-  text-decoration: underline;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  display: block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 20px auto;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .sign-in-wrapper {
-    flex-direction: column;
-  }
-
-  .side-banner {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .sign-in-container {
-    width: 100%;
-  }
+.SignUp_button:hover{
+  background-color: #ffffff;
+  color: #4285f4;
+  border: 2px solid #4285f4;
+  transition: background-color 0.3s ease, color 0.2s ease;
+  transform: scale(1.05);
 }

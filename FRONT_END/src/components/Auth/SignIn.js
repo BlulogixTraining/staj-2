@@ -64,7 +64,7 @@ export const SignIn = () => {
 
       {/* Sign-In Form */}
       <div className="sign-in-container">
-        <h2>Sign In</h2>
+        <h2>Welcome Back</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
@@ -91,12 +91,12 @@ export const SignIn = () => {
             />
           </div>
           {error && <p className="error">{error}</p>}
-          <button type="submit" className="btn-primary">Sign In</button>
+          <button type="submit" className="SignIn_button">Sign In</button>
         </form>
         <p>
           Don’t have an account?{' '}
-          <button className="btn-link" onClick={() => navigate('/signup')}>
-            Sign Up
+          <button className="SignUp_button" onClick={() => navigate('/signup')}>
+            Sign Up here
           </button>
         </p>
       </div>
