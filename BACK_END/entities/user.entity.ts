@@ -1,5 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
 
+// Enum for role values
+export enum UserRole {
+  ADMIN = 'admin',
+  MANAGER = 'manager',
+  SALESMAN = 'salesman',
+}
+
 @Entity('users')
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -13,4 +20,12 @@ export class User extends BaseEntity {
 
   @Column({ type: 'varchar', length: 255 })
   password: string; // Hashed password of the user
+
+  // New column for role, using the enum to restrict to specific values
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.SALESMAN, // Default role can be set to 'salesman'
+  })
+  role: UserRole; // Role of the user
 }
