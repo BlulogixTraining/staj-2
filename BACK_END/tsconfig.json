@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",        // or your desired target
+      "module": "CommonJS",      // For Node.js
+      "moduleResolution": "node", 
+      "outDir": "./dist",        // Compiled files will go here
+      "rootDir": "./",        // Your source folder
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,   
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "include": ["./**/*.ts"],
+    "exclude": ["node_modules"]
+  }
+  
