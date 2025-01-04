@@ -15,7 +15,7 @@ const config: DataSourceOptions = {
   entities: [User],
 //   migrations: ['./migrations/**/*.ts'],
   synchronize: true,
-  logging: true,
+  logging: false,
 };
 
 export default config;

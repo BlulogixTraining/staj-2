@@ -5,18 +5,26 @@ import cors from 'cors';
 import AppDataSource from './config/database'; // Your TypeORM config
 import 'reflect-metadata';
 import authRoutes from './routes/auth.routes';
+import cookieParser from "cookie-parser";
+
 
 
 dotenv.config(); // Load environment variables
 
 const app: Application = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Frontend origin
+    credentials: true, // Allow cookies to be sent
+  })
+);
 
 // Database Connection
 AppDataSource.initialize()

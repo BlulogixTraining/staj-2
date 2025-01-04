@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/SignIn.css';
+import { AuthContext } from "../../context/AuthContext";
 
 // Utility functions for validation
 const validateEmail = (email) => {
@@ -15,6 +16,7 @@ const validatePassword = (password) => {
 };
 
 export const SignIn = () => {
+  const { login } = useContext(AuthContext)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -28,7 +30,7 @@ export const SignIn = () => {
     setError(''); // Clear errors on input change
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate form inputs
@@ -42,15 +44,20 @@ export const SignIn = () => {
       return;
     }
 
-    if (!validatePassword(formData.password)) {
-      setError('Password must be at least 6 characters long and include at least one number.');
-      return;
-    }
+      // if (!validatePassword(formData.password)) {
+      //   setError('Password must be at least 6 characters long and include at least one number.');
+      //   return;
+      // }
 
-    // Proceed to sign in
-    console.log('Sign In Data:', formData);
-    navigate('/dashboard');
-  };
+    // Call login function and get response
+    const response = await login(formData.email, formData.password);
+    if (response.success) {
+      navigate("/dashboard");
+    } else {
+      setError(response.message); // Show the error message from the backend
+    }
+};
+
 
   return (
     <div className="sign-in-wrapper">
@@ -65,6 +72,7 @@ export const SignIn = () => {
       {/* Sign-In Form */}
       <div className="sign-in-container">
         <h2>Welcome Back</h2>
+        {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
@@ -90,7 +98,7 @@ export const SignIn = () => {
               required
             />
           </div>
-          {error && <p className="error">{error}</p>}
+          
           <button type="submit" className="SignIn_button">Sign In</button>
         </form>
         <p>

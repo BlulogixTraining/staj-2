@@ -56,21 +56,21 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   if (!email || !password) {
     res.status(400).json({ message: 'Please provide email and password' });
     return;
-}
+  }
 
   // Find user by email
   const user = await userRepository.findOne({ where: { email } });
   if (!user) {
     res.status(404).json({ message: 'User not found' });
     return;
-}
+  }
 
   // Compare the password with the hashed password
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
     res.status(401).json({ message: 'Invalid credentials' });
     return;
-}
+  }
 
   // Generate JWT token
   const token = jwt.sign(
@@ -79,9 +79,48 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     { expiresIn: '1h' } // Token expires in 1 hour
   );
 
-  res.status(200).json({
-    message: 'Login successful',
-    token,
-  });
+  res.cookie('token', token, {
+  httpOnly: true,
+  sameSite: 'lax',  // Use 'strict' for production
+  maxAge: 60 * 60 * 1000,
+});
+res.status(200).json({ message: 'Login successful' });
   return;
+};
+
+// Function to check the token
+export const checkToken = async (req: Request, res: Response): Promise<void> => {
+  const token = req.cookies.token; // Get token from cookies
+
+  if (!token) {
+    res.status(401).json({ message: 'Unauthorized: No token provided' });
+    return;
+  }
+
+  try {
+    // Verify the token
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: number; email: string };
+    const user = await userRepository.findOne({ where: { id: decoded.userId } });
+
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    // Return user information
+    res.status(200).json({
+      message: 'Token is valid',
+      user: { userId: user.id, role: user.role, email: user.email },
+    });
+  } catch (error) {
+    res.status(401).json({ message: 'Unauthorized: Invalid or expired token' });
+  }
+};
+
+export const logout = (req: Request, res: Response): void => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'lax',
+  });
+  res.status(200).json({ message: 'Logout successful' });
 };

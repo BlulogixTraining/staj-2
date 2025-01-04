@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/SignIn.css';
 import '../../styles/SignUp.css';
+import { AuthContext } from '../../context/AuthContext.js'
 
 const SignUp = () => {
+  const { signup } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
@@ -11,26 +14,36 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setError("");
+    setSuccess("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
-      return;
+    const { username, email, password, confirmPassword } = formData;
+
+    const response = await signup(username, email, password, confirmPassword);
+
+    if (response.success) {
+      setSuccess(response.message);
+      setTimeout(() => navigate("/sigin"), 2000); // Redirect after 2 seconds
+    } else {
+      setError(response.message);
     }
-    console.log('Form Submitted:', formData);
-    navigate('/dashboard');
   };
 
   return (
     <div className="sign-up-container">
       <div className="content">
         <h2>Create Your Account</h2>
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
         <form onSubmit={handleSubmit} className="sign-up-form">
           <input
             type="text"
