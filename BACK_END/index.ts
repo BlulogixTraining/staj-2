@@ -5,6 +5,7 @@ import cors from 'cors';
 import AppDataSource from './config/database'; // Your TypeORM config
 import 'reflect-metadata';
 import authRoutes from './routes/auth.routes';
+import adminRoutes from './routes/admin.routes';
 import cookieParser from "cookie-parser";
 
 
@@ -36,9 +37,8 @@ AppDataSource.initialize()
   });
 
 // Routes
-console.log('test')
 app.use('/api/auth', authRoutes); // Use routes with `/api` prefix
-
+app.use('/api/admin', adminRoutes);
 // Health Check Endpoint
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('CRM API is running.');

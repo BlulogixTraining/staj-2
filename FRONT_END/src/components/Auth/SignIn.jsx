@@ -51,6 +51,7 @@ export const SignIn = () => {
 
     // Call login function and get response
     const response = await login(formData.email, formData.password);
+    console.log(response)
     if (response.success) {
       navigate("/dashboard");
     } else {

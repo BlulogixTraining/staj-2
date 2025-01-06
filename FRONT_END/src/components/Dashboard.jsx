@@ -25,7 +25,7 @@ const Dashboard = () => {
           <p>Loading user data...</p>
         )}
       </div>
-      <button onClick={handleLogout} className="logout-button">Logout</button>
+      <button onClick={handleLogout} className="logout-button" style={{backgroundColor: "black"}}>Logout</button>
     </div>
   );
 };

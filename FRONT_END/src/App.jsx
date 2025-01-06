@@ -7,16 +7,20 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from './components/ProtectedRoute'
 import GuestRoute from './components/GuestRoute'
 import Dashboard from './components/Dashboard'
+import AdminDashboard from './pages/AdminDashboard'
+import Unauthorized from './components/Unauthorized';
 
 function App() {
   return (
     <AuthProvider>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<GuestRoute><HomePage /></GuestRoute>} />
-        <Route path="/signin" element={<GuestRoute><SignIn /></GuestRoute>} />
-        <Route path="/signup" element={<GuestRoute><SignUp /></GuestRoute>} />
-         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+         <Route path="/dashboard" element={<Dashboard />} />
+         <Route path="/admin" element={<AdminDashboard />}></Route>
+         <Route path="/unauthorized" element={<Unauthorized />}></Route>
       </Routes>
     </BrowserRouter>
     </AuthProvider>

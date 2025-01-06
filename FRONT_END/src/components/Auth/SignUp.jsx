@@ -32,7 +32,7 @@ const SignUp = () => {
 
     if (response.success) {
       setSuccess(response.message);
-      setTimeout(() => navigate("/sigin"), 2000); // Redirect after 2 seconds
+      setTimeout(() => navigate("/signin"), 2000); // Redirect after 2 seconds
     } else {
       setError(response.message);
     }

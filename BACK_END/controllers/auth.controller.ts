@@ -4,7 +4,12 @@ import jwt from 'jsonwebtoken';
 import { User } from '../entities/user.entity'; // Assuming you have a User entity
 import AppDataSource from '../config/database'; // Assuming you have a data-source file
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET
+export enum UserRole {
+  ADMIN = 'admin',
+  MANAGER = 'manager',
+  SALESMAN = 'salesman',
+}
 
 // Create the DataSource instance
 const userRepository = AppDataSource.getRepository(User);
@@ -13,10 +18,10 @@ const userRepository = AppDataSource.getRepository(User);
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, email, password } = req.body;
 
-  if (!username || !email || !password) {
-    res.status(400).json({ message: 'Please provide all fields' });
-    return;
-}
+    if (!username || !email || !password) {
+      res.status(400).json({ message: 'Please provide all fields' });
+      return;
+  }
 
   // Check if the user already exists
   const existingUser = await userRepository.findOne({ where: { email } });
@@ -71,20 +76,18 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.status(401).json({ message: 'Invalid credentials' });
     return;
   }
-
-  // Generate JWT token
+ 
   const token = jwt.sign(
-    { userId: user.id, email: user.email },
+    { userId: user.id, email: user.email, role: user.role },
     JWT_SECRET,
-    { expiresIn: '1h' } // Token expires in 1 hour
+    { expiresIn: '1h' }
   );
-
   res.cookie('token', token, {
-  httpOnly: true,
-  sameSite: 'lax',  // Use 'strict' for production
-  maxAge: 60 * 60 * 1000,
-});
-res.status(200).json({ message: 'Login successful' });
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 1000,
+  });
+  res.status(200).json({ message: 'Login successful', role: user.role });
   return;
 };
 
@@ -110,7 +113,7 @@ export const checkToken = async (req: Request, res: Response): Promise<void> => 
     // Return user information
     res.status(200).json({
       message: 'Token is valid',
-      user: { userId: user.id, role: user.role, email: user.email },
+      user: { role: user.role, email: user.email },
     });
   } catch (error) {
     res.status(401).json({ message: 'Unauthorized: Invalid or expired token' });
