@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import { Task } from './task.entity';
 
 // Enum for role values
 export enum UserRole {
@@ -28,4 +29,10 @@ export class User extends BaseEntity {
     default: UserRole.SALESMAN, // Default role can be set to 'salesman'
   })
   role: UserRole; // Role of the user
+
+  @OneToMany(() => Task, (task) => task.assigned_to)
+  tasksAssigned: Task[];
+
+  @OneToMany(() => Task, (task) => task.assigned_by)
+  tasksCreated: Task[];
 }

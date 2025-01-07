@@ -1,7 +1,8 @@
 import { DataSourceOptions } from 'typeorm';
 import dotenv from 'dotenv';
 
-import {User} from './entities/user.entity'
+import { User } from './entities/user.entity'
+import { Task } from './entities/task.entity';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const config: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [User],
+  entities: [User, Task],
 //   migrations: ['./migrations/**/*.ts'],
   synchronize: true,
   logging: false,
